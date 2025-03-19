@@ -7,7 +7,7 @@ const Course = ({course}) => {
           {part.name} {part.exercises} 
         </p>
       )}
-      <h3>
+      <h3>  {/*reduce done*/}
         total of {course.parts.reduce((sum, part) =>
           sum + part.exercises, 0
         )} exercises
