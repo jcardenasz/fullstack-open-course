@@ -15,6 +15,14 @@ const Total = (props) => {
 }
 
 const Statistics = (props) => {
+  if (props.total === 0) {
+    return (
+      <div>
+        <h1> statistics </h1>
+        <p> No feedback given </p>
+      </div>
+    )
+  }
   return (
     <div>
       <h1> statistics </h1>
@@ -43,20 +51,14 @@ const App = (props) => {
 
   const goodClickHandler = () => {
     setGoodClicks( goodClicks+1 )
-    setAverage( (good * 1 + neutral * 0 + bad * (-1)) / ( goodClicks + neutralClicks + badClicks ) )
-    setPositive( (good/good + neutral + bad)*100 )
   }
   
   const neutralClickHandler = () => {
     setNeutralClicks( neutralClicks+1 )
-    setAverage( (good * 1 + neutral * 0 + bad * (-1)) / ( goodClicks + neutralClicks + badClicks ) )
-    setPositive( (good/good + neutral + bad)*100 )
   }
   
   const badClickHandler = () => {
     setBadClicks( badClicks+1 )
-    setAverage( (good * 1 + neutral * 0 + bad * (-1)) / ( goodClicks + neutralClicks + badClicks ) )
-    setPositive( (good/good + neutral + bad)*100 )
   }
 
   const averagePositiveHandlerGood = () => {
