@@ -2,13 +2,14 @@ import { useState } from 'react'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { id: 1, name: 'Arto Hellas' }
   ]) 
   const [newName, setNewName] = useState('')
 
   const addPerson = (event) => {
     event.preventDefault()
     const personObject = {
+      id: persons.length + 1,
       name: newName
     }
     setPersons(persons.concat(personObject))
@@ -38,7 +39,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       {persons.map(person => 
-        <p key={person.name}>{person.name}</p>
+        <p key={person.id}>{person.name}</p>
       )}
     </div>
   )
