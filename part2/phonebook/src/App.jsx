@@ -34,9 +34,22 @@ const App = () => {
       number: newNumber,
       id: persons.length + 1,
     }
+    const possibleUpdate = persons.find(person => person.name === newName)
     const personExists = persons.find(person => person.name === newName || person.number === newNumber)
     personExists 
-    ? alert(`"${newName}" or "${newNumber}" already added to phonebook`)
+    ? (
+      alert(`"${newName}" or "${newNumber}" already added to phonebook`),
+      window.confirm(`Would you like to update ${newName}'s number with a new one?`)
+      ? (
+        axiosRequests
+          .update(possibleUpdate.id, personObject)
+          .then(response => {
+            setPersons(persons.map(person => person.id !== possibleUpdate.id ? person : response.data))
+            console.log('person updated: ', response.data)
+            console.log('update response: ', response)
+          })
+        ): console.log('update cancelled')
+      )
     : (
       axiosRequests
         .create(personObject)
