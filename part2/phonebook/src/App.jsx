@@ -45,9 +45,25 @@ const App = () => {
           setNewName(''),
           setNewNumber(''),
           console.log('person added: ', response.data),
-          console.log('response: ', response)
+          console.log('add response: ', response)
         })     
       ) 
+  }
+
+  const deletePerson = (id) => {
+    const person = persons.find(person => person.id === id)
+    const confirm = window.confirm(`Delete ${person.name}?`)
+    confirm
+    ? (
+      axiosRequests
+        .deletePersonRequest(id)
+        .then(response => {
+          setPersons(persons.filter(person => person.id !== id))
+          console.log('person deleted: ', person)
+          console.log('delete response: ', response)
+        })
+      )
+    : console.log('delete cancelled')
   }
 
   const handlePersonChange = (event) => {
@@ -84,8 +100,8 @@ const App = () => {
         handleNumberChange={handleNumberChange}
       />
       {search
-        ?<Persons persons={searchResults}/>
-        :<Persons persons={persons}/>
+        ?<Persons persons={searchResults} deletePerson={deletePerson}/>
+        :<Persons persons={persons} deletePerson={deletePerson}/>
       }
     </div>
   )

@@ -12,4 +12,8 @@ const update = (id, newObject) => {
     return axios.put(`http://localhost:3001/persons/${id}`, newObject)
 }
 
-export default { getAll, create, update }
+const deletePersonRequest = (id) => {
+    return axios.delete(`http://localhost:3001/persons/${id}`)
+}
+
+export default { getAll, create, update, deletePersonRequest }
