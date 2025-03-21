@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import axiosRequests from './services/axiosRequests'
 import { Form } from './components/Form'
 import { Filter } from './components/Filter'
 import { Persons } from './components/Persons'
@@ -12,11 +13,9 @@ const App = () => {
   const [searchResults, setSearchResults] = useState([])
 
   useEffect(() => {
-    console.log('effect');
-    axios
-      .get('http://localhost:3001/persons')
+    axiosRequests
+      .getAll()
       .then(response => {
-        console.log('promise fulfilled')
         setPersons(response.data)
       })
   }, [])
@@ -39,8 +38,8 @@ const App = () => {
     personExists 
     ? alert(`"${newName}" or "${newNumber}" already added to phonebook`)
     : (
-      axios
-        .post('http://localhost:3001/persons', personObject)
+      axiosRequests
+        .create(personObject)
         .then(response => {
           setPersons(persons.concat(response.data)),
           setNewName(''),
